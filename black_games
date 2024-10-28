@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS endereco
 (
 	pk_id_endereco INT AUTO_INCREMENT PRIMARY KEY,
 	bairro VARCHAR(100),
-    rua VARCHAR(100),
-    numero INT,
-    ponto_referencia VARCHAR(255)
+        rua VARCHAR(100),
+        numero INT,
+        ponto_referencia VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS cliente
@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS cliente
     telefone_cliente VARCHAR(50),
     cpf VARCHAR(15),
     usuario_cliente VARCHAR(16),
-    login_cliente VARCHAR(8)
+    login_cliente VARCHAR(8),
+    foreign key (fk_id_endereco) references endereco(pk_id_endereco)
     
 );
 
@@ -50,13 +51,17 @@ CREATE TABLE IF NOT EXISTS entregador
 
 CREATE TABLE IF NOT EXISTS pedido
 (
-	pk_id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    pk_id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     fk_id_cliente INT,
     fk_id_produto INT,
     fk_id_vendedor INT,
     fk_id_entregador INT,
     quantidade INT,
-    data_venda DATE
+    data_venda DATE,
+    foreign key (fk_id_cliente) references cliente(pk_id_cliente),
+    foreign key (fk_id_produto) references produto(pk_id_cliente),
+    foreign key (fk_id_vendedor) vendedor vendedor(pk_id_vendedor),
+    foreign key (fk_id_entregador) references entregador(pk_id_entregador)
 );
 
 
